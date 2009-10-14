@@ -1,9 +1,7 @@
 #!/usr/bin/env python
+# Memir is GPL3 program
 
-import gtk
-import gobject
-import pygtk
-import locale
+import gtk, gobject, pygtk, locale
 
 class mygui:
     def on_window1_destroy(self, widget, data=None):
