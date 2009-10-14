@@ -53,8 +53,10 @@ class mygui:
         cell = gtk.CellRendererText()
         self.encodings = []
         for code in locale.encodings.aliases.aliases:
-            self.model.append([locale.encodings.aliases.aliases[code]])
             self.encodings.append(locale.encodings.aliases.aliases[code])
+        self.encodings.sort()
+        for code in self.encodings:
+            self.model.append([code])
         self.source = self.encodings[0]
         self.output = self.encodings[0]
         for w in [self.combo_source, self.combo_output]:            
