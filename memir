@@ -11,6 +11,16 @@ class mygui:
 
     def quit_btn_clicked_cb(self, widget, data=None):
         gtk.main_quit()
+        
+    def showway_btn_clicked_cb(self, widget, data=None):
+        for code in self.encodings:
+            for code2 in self.encodings:
+                try:
+                    if self.result.get_text() == self.input.get_text().encode(code).decode(code2):
+                        self.combo_source.set_active(self.encodings.index(code))
+                        self.combo_output.set_active(self.encodings.index(code2))
+                except:
+                    pass
 
     def mk_source_clicked_cb(self, widget, data=None):
         self.input.set_text(self.result.get_text())
@@ -30,7 +40,7 @@ class mygui:
         try:
             self.result.set_text(self.input.get_text().encode(self.source).decode(self.output))
         except:
-            self.result.set_text(self.input.get_text() + " can't be encoded from "+self.source+" to "+self.output)
+            self.result.set_text("Can't encode "+self.input.get_text() + " from "+self.source+" to "+self.output)
 
     def __init__(self):
         builder = gtk.Builder()
@@ -39,6 +49,7 @@ class mygui:
         self.combo_source = builder.get_object("from_encoding_combo")
         self.combo_output = builder.get_object("to_encoding_combo")
         self.result = builder.get_object("result_output")
+        self.trace_btn = builder.get_object("showway_btn")
         self.input = builder.get_object("source_input")
         self.model = gtk.ListStore(gobject.TYPE_STRING)
         cell = gtk.CellRendererText()
